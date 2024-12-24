@@ -47,5 +47,9 @@ target_link_libraries(issw InputSourceSwitcher)
 add_executable(testvim test.c)
 target_link_libraries(testvim InputSourceSwitcher)
 
+add_custom_command(TARGET issw POST_BUILD
+                   COMMAND ${CMAKE_INSTALL_NAME_TOOL} -add_rpath "@executable_path/../lib" $<TARGET_FILE:issw>)
+
 install(TARGETS issw DESTINATION bin)
 install(TARGETS InputSourceSwitcher DESTINATION lib)
+
